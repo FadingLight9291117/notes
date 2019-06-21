@@ -32,3 +32,24 @@
 | Object.toString()      | 将对象转化为String类型并返回，不改变原对象，需要类重载toString()方法，Object不能为null否则报空指针异常 |
 | (String)Object         | 将对象转化为String对象，需要判断Object是否可转换，否则抛出异常，(String)null合法                       |
 | String.ValueOf(Object) | 将Object转换为String并返回，不改变原对象，Object=null时返回"null"                                      |
+
+## 字符串的加法
+
+- 如下，由于String不可修改，效率差
+
+  ```java
+    String a="abc";
+    String b=a+"123";
+  ```
+
+- 使用StringBuffer和StringBuilder类的append方法修改
+
+  ```java
+    StringBuffer a=new StringBuffer("abc");
+    a.append("aaa");
+  ```
+
+- StringBuffer和StringBuilder的对象都是可变对象
+- StringBuffer（同步，线程安全，修改快速）
+- StringBuilder（不同步，线程不安全，修改更快）
+- 字符串append操作速度：StringBuilder>StringBuilder>String
