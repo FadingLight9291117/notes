@@ -79,10 +79,10 @@ with open = ('../file.txt','w',encoding='utf=8') as file:
 
         writer=csv.writer(file)
 
-        |      函数名      |                      描述                      |
-        | :--------------: | :--------------------------------------------: |
-        | csv.writer(file) | 设置读取文件句柄，file为文件句柄，返回文件对象 |
-        | csv.reader(file) | 设置写入文件句柄，file问文件句柄，返回数据对象 |
+        |                函数名                |                                                  描述                                                   |
+        | :----------------------------------: | :-----------------------------------------------------------------------------------------------------: |
+        | csv.writer(file,lineterminator='/n') | 设置读取文件句柄，file为文件句柄，返回文件对象;加入参数lineterminator='/n'，否则csv文件中会产生多余空行 |
+        |           csv.reader(file)           |                             设置写入文件句柄，file问文件句柄，返回数据对象                              |
 
     - 读
 
@@ -106,10 +106,10 @@ with open = ('../file.txt','w',encoding='utf=8') as file:
 
         csv.DictReader(file)
 
-        |             函数名              | 描述                                               |
-        | :-----------------------------: | :------------------------------------------------- |
-        | csv.DictWriter(file,fieldnames) | file为文件句柄，fieldnames为数据索引，返回文件对象 |
-        |      csv.DictReader(file)       | file为文件句柄，返回数据对象                       |
+        |                       函数名                        | 描述                                                                                                        |
+        | :-------------------------------------------------: | :---------------------------------------------------------------------------------------------------------- |
+        | csv.DictWriter(file,fieldnames,lineterminator='/n') | file为文件句柄，fieldnames为数据索引，返回文件对象;加入参数lineterminator='/n'，否则csv文件中会产生多余空行 |
+        |                csv.DictReader(file)                 | file为文件句柄，返回数据对象                                                                                |
 
     - 读
 
