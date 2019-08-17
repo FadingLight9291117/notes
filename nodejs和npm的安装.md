@@ -14,6 +14,10 @@
 
    - sudo npm install -g n
 
+4. 安装node最新版
+
+   - sudo n latest
+
 4. 使用n切换node版本
 
    - sudo n
