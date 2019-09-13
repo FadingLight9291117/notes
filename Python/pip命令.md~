@@ -1,0 +1,32 @@
+# pip命令
+
+## 
+
+1. pip install <...>
+	- 安装第三方库	
+
+2. pip install -U <...>
+	- 更新第三方库
+
+3. pip uninstall <...>
+	- 卸载第三方库
+
+3. pip download <...>
+	- 下载但不安装
+
+4. pip show <...>
+	- 列出某个库的详细信息
+
+5. pip search <...>
+	- 根据关键字在名称和介绍中搜索第三方库
+
+6. pip install <文件名>
+	- 安装手动下载的库二进制文件
+
+7. pip list
+	- 列出已安装的第三方库
+	- -o 可升级的库
+
+## 
+
+1. python -m pip install --upgrade pip

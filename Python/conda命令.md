@@ -4,9 +4,11 @@
 
 1. conda update conda
 
-2. conda update anaconda
+// 2. conda update anaconda
 
 3. conda update anaconda-navigator
+
+4. conda update navigator-updater
 
 ## 卸载anaconda
 
