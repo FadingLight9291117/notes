@@ -1,0 +1,58 @@
+《JavaScript教程》自学笔记
+
+数据类型
+概述
+1. 3种方法判断类型
+ typeof运算符 instanceof运算符 Object.prototype.toString方法
+数值
+1. null undefined
+2. NaN 非数字，属于Number，isNaN()
+3. Infinity 无穷，超出表示范围,isInfinity()
+4. parseInt() parseFloat() 整型和浮点数转换
+字符串
+对象
+1. delete 删除属性
+2. in
+3.  for...in...
+4. with——它的作用是操作同一个对象的多个属性时，提供一些书写的方便。
+函数
+1. 函数参数不是必需的，JavaScript 允许省略参数。
+2. arguments 对象——包含了函数运行时的所有参数，arguments[0]就是第一个参数
+3. 闭包
+           最大用处有两个
+           一个是可以读取函数内部的变量
+           另一个就是让这些变量始终保持在内存中，即闭包可以使得它诞生环境一直存在。
+4. eval命令接受一个字符串作为参数，并将这个字符串当作语句执行。
+数组
+1. typeof 返回是对象
+
+运算符
+比较运算符
+1. 严格相等 ===
+2. 不严格相等 ==
+其他运算符
+1. void运算符的作用是执行一个表达式，然后不返回任何值，或者说返回undefined。
+    用户点击链接提交表单，但是不产生页面跳转。<a href="javascript: void(document.form.submit())">
+2. 逗号运算符用于对两个表达式求值，并返回后一个表达式的值。
+
+语法专题
+编程风格
+1. JavaScript 会自动添加句末的分号，导致一些难以察觉的错误——因此，表示区块起首的大括号，不要另起一行。
+2. 相等运算符会自动转换变量类型，造成很多意想不到的情况——因此，建议不要使用相等运算符（==），只使用严格相等运算符（===）。
+console对象
+1. 静态方法
+1.1 console.log()——类似C语言的标准格式化输出
+console.info() console.debug() console.warn() console.error() 
+1.2 console.table()——表格化显示对象
+1.3 console.count()——计数
+1.4 console.dir()
+console.dirxml()——格式化输出对象，DOM。Node 环境之中，还可以指定以代码高亮的形式输出。console.dir(obj, {colors: true})
+1.5 console.assert()——方法主要用于程序运行过程中，进行条件判断，如果不满足条件，就显示一个错误，但不会中断程序执行。
+1.6 console.time()
+console.timeEnd()——计时
+1.7 console.group()
+console.groupEnd()
+console.groupCollapsed()——可折叠输出消息
+1.8 console.trace()
+显示当前执行的代码在堆栈中的调用路console.clear()
+2. debugger语句——设置断点
