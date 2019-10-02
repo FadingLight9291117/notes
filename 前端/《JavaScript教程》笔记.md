@@ -1,55 +1,72 @@
-《JavaScript教程》学习笔记
+# 《JavaScript教程》学习笔记
 
-数据类型
-概述
+## 数据类型
+
+### 概述
+
 1. 3种方法判断类型
  typeof运算符 instanceof运算符 Object.prototype.toString方法
-数值
+ 
+### 数值
+
 1. null undefined
 2. NaN 非数字，属于Number，isNaN()
 3. Infinity 无穷，超出表示范围,isInfinity()
 4. parseInt() parseFloat() 整型和浮点数转换
-字符串
-对象
+
+### 字符串
+
+### 对象
+
 1. delete 删除属性
 2. in
 3.  for...in...
 4. with——它的作用是操作同一个对象的多个属性时，提供一些书写的方便。
-函数
+
+### 函数
+
 1. 函数参数不是必需的，JavaScript 允许省略参数。
 2. arguments 对象——包含了函数运行时的所有参数，arguments[0]就是第一个参数
-3. 闭包
-           最大用处有两个
-           一个是可以读取函数内部的变量
-           另一个就是让这些变量始终保持在内存中，即闭包可以使得它诞生环境一直存在。
+3. 闭包——最大用处有两个，一个是可以读取函数内部的变量；另一个就是让这些变量始终保持在内存中，即闭包可以使得它诞生环境一直存在。
 4. eval命令接受一个字符串作为参数，并将这个字符串当作语句执行。
-数组
+
+### 数组
 1. typeof 返回是对象
 
-运算符
-比较运算符
-1. 严格相等 ===
-2. 不严格相等 ==
-其他运算符
-1. void运算符的作用是执行一个表达式，然后不返回任何值，或者说返回undefined。
-    用户点击链接提交表单，但是不产生页面跳转。<a href="javascript: void(document.form.submit())">
-2. 逗号运算符用于对两个表达式求值，并返回后一个表达式的值。
+### 运算符
 
-语法专题
-数据类型转换
+1. 比较运算符
+- 严格相等 ===
+-  不严格相等 ==
+2. 其他运算符
+- void运算符的作用是执行一个表达式，然后不返回任何值，或者说返回undefined。
+    用户点击链接提交表单，但是不产生页面跳转。
+	```<a href="javascript: void(document.form.submit())">```
+-  逗号运算符用于对两个表达式求值，并返回后一个表达式的值。
+
+## 语法专题
+
+### 数据类型转换
+
 1. 强制转换主要指使用Number()、String()和Boolean()
-错误处理机制
+
+### 错误处理机制
+
 1. error实例对象
-message：错误提示信息
-name：错误名称（非标准属性）
-stack：错误的堆栈（非标准属性）
+- message：错误提示信息
+- name：错误名称（非标准属性）
+- stack：错误的堆栈（非标准属性）
 2. 自定义错误——继承error
 3. throw
 4. try-catch-finally
-编程风格
+
+### 编程风格
+
 1. JavaScript 会自动添加句末的分号，导致一些难以察觉的错误——因此，表示区块起首的大括号，不要另起一行。
 2. 相等运算符会自动转换变量类型，造成很多意想不到的情况——因此，建议不要使用相等运算符（==），只使用严格相等运算符（===）。
-console对象
+
+### console对象
+
 1. 静态方法
 1.1 console.log()——类似C语言的标准格式化输出
 console.info() console.debug() console.warn() console.error() 
@@ -67,7 +84,8 @@ console.groupCollapsed()——可折叠输出消息
 显示当前执行的代码在堆栈中的调用路console.clear()
 2. debugger语句——设置断点
 
-标准库
+## 标准库
+
 1. Object
 1.1. Object()函数
 1.2. 静态方法
@@ -85,8 +103,10 @@ console.groupCollapsed()——可折叠输出消息
 8.1.1 参数对象的 toJSON 方法
 8.2. JSON.parse()
 
-面向对象
-继承
+## 面向对象
+
+### 继承
+
 1. prototype属性
 原型对象的所有属性和方法，都能被实例对象共享。
 2. 原型链
@@ -96,8 +116,10 @@ console.groupCollapsed()——可折叠输出消息
 apply()——调用有参构造函数
 bind()——返回函数指针
 
-异步操作（多线程）
-概述
+## 异步操作（多线程）
+
+### 概述
+
 1. 单线程模型
 1.1 “事件循环”机制（Event Loop）
 1.2 创建多个线程，但子线程完全受主线程控制，且不得操作 DOM。本质是单线程。
@@ -107,12 +129,15 @@ JavaScript 运行时，除了一个正在运行的主线程，引擎还提供一
 3.1 回调函数
 3.2 事件监听
 3.3 发布订阅
-定时器
+
+### 定时器
+
 1. setTimeout()——一次调用
 2. setInterval()——循环调用
 3. clearTimeout()
 4. clearInterval()
-Promise对象
+
+### Promise对象
 
 
 

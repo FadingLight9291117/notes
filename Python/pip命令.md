@@ -30,7 +30,7 @@
 
 8. pip freeze
 	- 以标准格式列出已安装库
-	- > xx.txt 导出到文件中
+	- >  xx.txt 导出到文件中
 ## 
 
 1. python -m pip install --upgrade pip
