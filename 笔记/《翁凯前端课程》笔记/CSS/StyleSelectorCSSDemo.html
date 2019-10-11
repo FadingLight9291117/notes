@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Title</title>
+	<style>
+		/*元素选择器*/
+		p, th, td {border: 1px solid blue;}
+		p {background-color: green;}
+
+		/*类选择器*/
+		*.import {color: red;}
+
+		/*id选择器*/
+		*#import {color: gray;}
+
+		/*属性选择器*/
+		*[title] {color: red}
+
+		/* 后代选择器 */
+		/*  p em 是所有后代*/
+		p em { background-color: yellow; }
+		/* p > em 仅直接第一层的后代 */
+		p > em { background-color: yellow; }
+
+		/* 兄弟选择器 */
+		h1 + p { background-color: red;}
+
+		/* 伪类选择器 */
+		/* 用于超链接 */
+		a:visited {}
+		a:link {}
+		a:hover {}
+		a:active {}
+
+
+	</style>
+</head>
+<body>
+	<img src="https://www.baidu.com/img/bd_logo1.png" width="300px" style="float: left;">
+	<h1>标题</h1>
+
+	<a href="http://www.163.com" target="_blank">百度</a>
+
+	<p>第<em>一</em>段</p>
+
+	<p class="import warning">第二段</p>
+
+	<p id="import">第三段</p>
+
+	<p title="title">第四段</p>
+
+	<table>
+		<caption>成绩</caption>
+		<tr>
+			<th>语文</th>
+			<th>数学</th>
+			<th>物理</th>
+			<th>化学</th>
+		</tr>
+		<tr>
+			<td>89</td>
+			<td>95</td>
+			<td>85</td>
+			<td>68</td>
+		</tr>
+	</table>
+</body>
+</html>

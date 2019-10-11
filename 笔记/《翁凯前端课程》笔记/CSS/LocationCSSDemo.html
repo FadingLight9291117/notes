@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Title</title>
+</head>
+<body>
+	<!-- 块状元素 -->
+	<!-- postion位置 static 正常的 relative 相对定位 absoulte 绝对定位，相对于父级元素 fixed 相当于absoulte,但是是根据整个浏览器窗口定位-->
+
+	<!-- 相对定位 -->
+	<p style="position: relative; left: -20px; bottom: -30px;">
+		<!-- 可以叠起来，不会影响第一行的高度，即第二行位置不会变 -->
+		第一段
+	</p>
+
+	<!-- 绝对定位 -->
+	<p>第二段</p>
+	<div style="position: absolute; top: 120px">
+		<p style="position: absolute;
+		left: -20px; bottom: -20px;">第三段</p>
+		<p>第四段</p>
+	</div>
+
+	<!-- 浮动定位 float: left right nono-->
+	<img src="https://www.baidu.com/img/bd_logo1.png" width= 400px style="float: right;">
+	<p>第五段</p>
+	<p>第六段</p>
+</body>
+</html>

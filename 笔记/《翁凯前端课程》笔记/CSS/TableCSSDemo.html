@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<!-- border-collapse: collapse 合并成一条线 
+				separate 分开 -->
+		<!-- caption-side 指定标题位置 -->
+		<!-- table-layout 表格布局 auto 自动计算表格长宽，
+		但是假如表格非常大，耗时，而且表格大小可能会变化 
+							fixed 固定-->
+		<table style="border: 1px solid blue;
+		border-collapse: collapse;
+		caption-side: bottom;
+		table-layout: fixed;">
+			<caption>成绩</caption>
+			<tr>
+				<!-- width height 指定高度宽度，指定一个其他都会变化 -->
+				<!-- vertical-align 指定垂直对齐 -->
+				<!-- text-align 指定水平对齐 -->
+				<th style="border: 1px solid blue;
+				width: 50px; height: 100px;
+				vertical-align: top;
+				text-align: right;
+				padding: 10px;">语文</th>
+				<th style="border: 1px solid blue;">数学</th>
+				<th style="border: 1px solid blue;">物理</th>
+				<th style="border: 1px solid blue;">化学</th>
+			</tr>
+			<tr>
+				<td style="border: 1px solid blue;">89</td>
+				<td style="border: 1px solid blue;">95</td>
+				<td style="border: 1px solid blue;">85</td>
+				<td style="border: 1px solid blue;">68</td>
+			</tr>
+		</table>
+	</body>
+</html>
