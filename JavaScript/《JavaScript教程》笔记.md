@@ -6,7 +6,7 @@
 
 1. 3种方法判断类型
  typeof运算符 instanceof运算符 Object.prototype.toString方法
- 
+
 ### 数值
 
 1. null undefined
@@ -19,30 +19,42 @@
 ### 对象
 
 1. delete 删除属性
+
 2. in
-3.  for...in...
+
+3. for...in...
+
 4. with——它的作用是操作同一个对象的多个属性时，提供一些书写的方便。
 
 ### 函数
 
 1. 函数参数不是必需的，JavaScript 允许省略参数。
+
 2. arguments 对象——包含了函数运行时的所有参数，arguments[0]就是第一个参数
+
 3. 闭包——最大用处有两个，一个是可以读取函数内部的变量；另一个就是让这些变量始终保持在内存中，即闭包可以使得它诞生环境一直存在。
+
 4. eval命令接受一个字符串作为参数，并将这个字符串当作语句执行。
 
 ### 数组
+
 1. typeof 返回是对象
 
 ### 运算符
 
 1. 比较运算符
-- 严格相等 ===
--  不严格相等 ==
+
+   - 严格相等 ===
+  
+   - 不严格相等 ==
+
 2. 其他运算符
-- void运算符的作用是执行一个表达式，然后不返回任何值，或者说返回undefined。
+
+   - void运算符的作用是执行一个表达式，然后不返回任何值，或者说返回undefined。
     用户点击链接提交表单，但是不产生页面跳转。
-	```<a href="javascript: void(document.form.submit())">```
--  逗号运算符用于对两个表达式求值，并返回后一个表达式的值。
+    ```<a href="javascript: void(document.form.submit())">```
+
+   - 逗号运算符用于对两个表达式求值，并返回后一个表达式的值。
 
 ## 语法专题
 
@@ -53,11 +65,17 @@
 ### 错误处理机制
 
 1. error实例对象
-- message：错误提示信息
-- name：错误名称（非标准属性）
-- stack：错误的堆栈（非标准属性）
+
+   - message：错误提示信息
+
+   - name：错误名称（非标准属性）
+
+   - stack：错误的堆栈（非标准属性）
+  
 2. 自定义错误——继承error
+
 3. throw
+
 4. try-catch-finally
 
 ### 编程风格
@@ -99,24 +117,26 @@ console.groupCollapsed()——可折叠输出消息
 6. Math对象
 7. RegExp对象
 8. JSON 对象
-8.1. JSON.stringify()
-8.1.1 参数对象的 toJSON 方法
-8.2. JSON.parse()
+   - JSON.stringify()
+     - 参数对象的 toJSON 方法
+     - JSON.parse()
 
 ## 面向对象
 
 ### 继承
 
 1. prototype属性
-原型对象的所有属性和方法，都能被实例对象共享。
+
+    - 原型对象的所有属性和方法，都能被实例对象共享。
+
 2. 原型链
 3. intanceof 运算符
-3. 调用父类构造函数——Super.call(this);
-4. call()——调用无参构造函数
+4. 调用父类构造函数——Super.call(this);
+5. call()——调用无参构造函数
 apply()——调用有参构造函数
 bind()——返回函数指针
 
-## 异步操作（多线程）
+## 异步操作
 
 ### 概述
 
