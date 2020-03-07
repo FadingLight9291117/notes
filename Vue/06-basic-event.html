@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<!-- 
+    1. v-on, 将事件侦听器绑定到元素上。
+ -->
+
+<body>
+    <div id="app">
+        <!-- v-on, 绑定时间监听器, 简写@ -->
+        <button @keyup="handleKeyup" v-on:click="increase">单击增加计数</button>
+        <p>你已经单击了按钮 {{ count }} 次</p>
+        <!-- 内联代码使用$event变量访问事件对象 -->
+    </div>
+    <script>
+        let v = new Vue({
+            el: "#app",
+            data: {
+                count: 0,
+            },
+            methods: {
+                increase(e) {
+                    this.count++;
+                },
+                handleKeyup(e) {
+                    if (e.keyCode === 27) {
+                        alert("Hello")
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+</html>

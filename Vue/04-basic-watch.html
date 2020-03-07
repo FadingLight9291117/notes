@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<!-- 
+    1. watch 通常使用computed, 但侦听器, 适合处理异步操作
+ -->
+
+<body>
+    <div id="app">
+        <input type="text" v-model="inputValue">
+        <p>5秒之后,显示输入的值为 "{{ oldInputValue }}"</p>
+    </div>
+    <script>
+        let v = new Vue({
+            el: "#app",
+            data: {
+                inputValue: "",
+                oldInputValue: "",
+                fromData: {
+                    username: ""
+                },
+                count: 0,
+            },
+            // 侦听器,侦听inputValue变化
+            watch: {
+                inputValue() {
+                    const newValue = this.inputValue;
+                    setTimeout(() => {
+                        this.oldInputValue = newValue;
+                    }, 5000);
+                },
+                // 获取旧值
+                count(val, oldVal) {
+                    console.log(val, oldVal);
+                },
+                // 监听data中某个对象的属性
+                'fromData.username'() {
+                    // this.fromData.username 变化了
+                },
+                // 深度监听, 监听整个对象
+                fromData: {
+                    handler() {
+                        console.log(val, oldVal);
+                    },
+                    deep: true
+                }
+            }
+        })
+    </script>
+</body>
+</html>

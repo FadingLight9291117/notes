@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Title</title>
+		<script src="./js/vue.js"></script>
+	</head>
+	<!-- 
+		1. 组件使用props传递数据
+		2. props验证，设置是否必需，默认值， 验证函数
+		3. props的大小写
+			props: percentDiscount,  使用时percent-discount="20%"
+		4. .sync 双向绑定
+	 -->
+	<body>
+		<div id="app">
+			<color-preview color="red"></color-preview>
+			 <!-- .sync 双向绑定 -->
+			<color-preview :color.sync="thisColor"></color-preview>
+		</div>
+		<script>
+			// 1. props传递数据到组件内部
+			Vue.component("color-preview", {
+				template: '<div class="color-preview" :style="style"></div>',
+				// props传递数据到组件内部
+				props: ['color'],
+				computed: {
+					style() {
+						return {backgroundColor: this.color}
+					}
+				}
+			});
+			
+			// 2. props验证
+			Vue.component('price-display', {
+				props: {
+					// 描述类型信息
+					price: Number,
+					unit: String,
+				}
+			})
+			
+			Vue.component('price-display2', {
+				props: {
+					price: {
+						type: Number,
+						// 描述是否必需
+						required: true,
+						// 验证函数
+						validator(value) {
+							return value >= 0;
+						}
+					},
+					unit: {
+						type: String,
+						// 设定默认值
+						default: '$',
+					}
+				}
+			})
+			
+			new Vue({
+				el: "#app",
+			})
+		</script>
+	</body>
+</html>

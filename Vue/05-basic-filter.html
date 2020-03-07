@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<!-- 
+    1. filter的使用
+    2. 可在插值和v-bind中使用 
+    3. 全局注册过滤器
+ -->
+
+<body>
+    <div id="app">
+        <p>商品一花费了 : {{ productOneCast | formatCost("$") }}</p>
+        <p>商品二花费了 : {{ productTwoCast | formatCost("$") }}</p>
+        <p>商品三花费了 : {{ productThreeCast | formatCost("$") }}</p>
+    </div>
+    <script>
+        let v = new Vue({
+            el: "#app",
+            data: {
+                productOneCast: 998,
+                productTwoCast: 2399,
+                productThreeCast: 5300,
+            },
+            filters: {
+                // 可使用多个过滤器
+                // 第二个参数传递给过滤器
+                formatCost(value, symbol) {
+                    return symbol + (value / 100).toFixed(2);
+                }
+            }
+        })
+
+        // 注册全局过滤器
+        Vue.filter("formatCost", (value, symbol) => symbol + (value / 100).toFixed(2));
+    </script>
+</body>
+</html>

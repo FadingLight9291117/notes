@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Title</title>
+		<script src="js/vue.js"></script>
+	</head>
+	<!-- 
+		1. 定义组件
+		2. 全局定义组件
+	 -->
+	<body>
+		<div id="app">
+			<custom-button></custom-button>
+			<custom-button2></custom-button2>
+		</div>
+		<script>
+			// 或者注册全局组件
+			Vue.component("custom-button2", {
+				template: "<button>自定义按钮2</button>"
+			});
+			
+			const CustomButton = {
+				template: "<button>自定义按钮1</button>"
+			};
+			
+			new Vue({
+				el: "#app",
+				components: {
+					CustomButton
+				}
+			});
+			
+			
+		</script>
+	</body>
+</html>

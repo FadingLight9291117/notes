@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./js/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<!--
+    1. 响应式设置属性
+    2. 响应式设置数组, 和缩短数组长度
+    2. 双向数据绑定, v-model
+    3. v-html
+-->
+
+<body>
+    <div id="id">
+        <!-- 实现响应式 -->
+        <div>seconds: {{ seconds }}</div>
+        <div>name: {{ name }}</div>
+
+        <ul>
+            <div>Users</div>
+            <li v-for="user in users">{{ user }}</li>
+        </ul>
+
+        <!-- 双向数据绑定 -->
+
+        <!-- v-model指令 -->
+        <input type="text" v-model="inputText">
+        <p>inputText: {{ inputText }}</p>
+        <!-- 单选框 -->
+        <label><input type="radio" v-model="value" value="一">一</label>
+        <label><input type="radio" v-model="value" value="二">二</label>
+        <label><input type="radio" v-model="value" value="三">三</label>
+        <label><input type="radio" v-model="value" value="四">四</label>
+        <p>选中的value值为 {{ value }}</p>
+
+        <!-- v-html 指令 -->
+        <div v-html="html"></div>
+    </div>
+
+    <script>
+        let v = new Vue({
+            el: "#id",
+            data: {
+                seconds: 0,
+                name: "陈诗琦",
+                users: ["陈诗琦", "车亮召"],
+                inputText: "",
+                value: "一",
+                html: `<font color="red">red</font>`
+            },
+            // 在vue对象创建完成后执行
+            // 实现响应式
+            created() {
+                setInterval(() => {
+                    this.seconds++;
+                }, 1000)
+            }
+        })
+
+        // 响应式设置属性
+        Vue.set(v, "name", "车亮召");
+        // 设置数组
+        Vue.set(v.users, 2, "车景逸");
+        Vue.set(v.users, 3, "小明");
+        // 缩短数组长度
+        v.users.splice(3)
+    </script>
+</body>
+
+</html>

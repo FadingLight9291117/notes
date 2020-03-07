@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Title</title>
+		<script src="./js/vue.js"></script>
+	</head>
+	<!-- 
+		1. 组件中的数据，方法，计算属性——data(), methods, computed
+	 -->
+	<body>
+		<div id="app">
+			<positive-numbers></positive-numbers>
+		</div>
+		
+		<script>
+			Vue.component("positive-numbers", {
+				template: "<p>有{{ positiveNumber.length }}个正数</p>",
+				data: () => {
+					return {
+						numbers: [2, 4, 21, -2, 0, 12, -12],
+					};
+				},
+				computed: {
+					positiveNumber() {
+						return this.numbers.filter(e => e > 0);
+					}
+				}
+			});
+			
+			new Vue({
+				el: "#app",
+			});
+		</script>
+	</body>
+</html>

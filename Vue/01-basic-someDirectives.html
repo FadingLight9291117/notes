@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+
+<!-- 
+    1. 插值,数组插值
+    2. v-if, v-else-if, v-else
+    3. v-show
+    4. v-for, for循环
+    5. v-bind 属性绑定, 简写:
+ -->
+
+<body>
+    <div id="app">
+        <!-- 插值 -->
+        Message: Hello {{ msg }} !<br>
+        Path: {{ path }}<br>
+        <!-- 数组 -->
+        name: {{ users[0] }}        
+
+        <!-- v-if-else指令 -->
+        <div v-if="state === 1">one</div>
+        <div v-else-if="state === 2">two</div>
+        <div v-else>other</div>
+
+        <!-- v-show指令 -->
+        <div v-show="state === 1">one</div>        
+        <div v-show="state === 2">two</div>
+        <div v-show="state != 1 && state != 2">other</div>
+
+        <!-- v-for指令, for循环指令 -->
+       <ol>
+           <div>Users</div>
+           <li v-for="user in users">{{ user }}</li>
+       </ol> 
+       <ul>
+           <div>one user</div>
+           <li v-for="(value, key) in user">{{key}}: {{value}}</li>
+       </ul>
+
+       <!-- v-bind 属性绑定, 简写 : -->
+       <button v-bind:type="buttonType" :disabled="buttonDisabled" >Test button</button>
+
+    </div>
+    <script>
+        let v = new Vue({
+            // 绑定元素
+            el: '#app',
+            // 数据 
+            data: {
+                msg: "world",
+                path: location.pathname,
+                state: 2,
+                users: ["陈诗琦", "车亮召"],
+                user: {"name": "陈诗琦", "age": 22},
+                buttonType: "submit",
+                buttonDisabled: true,
+            }
+        });
+    </script>
+</body>

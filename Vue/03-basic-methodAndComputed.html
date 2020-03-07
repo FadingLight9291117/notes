@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/vue.js"></script>
+</head>
+
+<!-- 
+    1. 方法methods
+    2. 计算属性computed
+ -->
+ 
+<body>
+    <div id="app">
+        <!-- 方法 -->
+        <p>当前状态: {{ statusFromId(status) }}</p>
+        <!-- 计算属性 -->
+        <p>数字总和是: {{ numberTotal1 }}</p>
+    </div>
+    <script>
+        let v = new Vue({
+            el: '#app',
+            data: {
+                status: 2,
+                numbers: [2, 3, 1, -2],
+            },
+            // 方法
+            methods: {
+                statusFromId(id) {
+                    const status = {
+                        0: "睡觉",
+                        1: "吃饭",
+                        2: "学习 Vue"
+                    };
+                    return status[id] || "未知状态: " + id;
+                }
+            },
+            // 计算属性, 计算属性会被缓存
+            computed: {
+                numberTotal1() {
+                    return this.numbers.reduce((sum, val) => sum + val);
+                },
+                // 还可以设置计算属性的值
+                numberTotal2: {
+                    get() {
+                        return thos.numbers.reduce((sum, val) => sum + val);
+                    },
+                    set(newValue) {
+                        const oldValue = this.numberTotal2;
+                        const difference = newValue - oldValue;
+                        this.numbers.push(difference)
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
