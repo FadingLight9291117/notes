@@ -1,0 +1,218 @@
+# Spring Boot Web开发
+
+## 一. 简介
+
+- 使用SprigBoot
+   1. 创建Spring Boot应用，选中我们需要的模块；
+   2. SpringBoot已经默认将这些场景配置好了，只需要在配置文件中指定少量的配置就可以运行起来
+   3. 自己编写业务代码
+
+- 自动配置原理？
+
+> xxxAutoConfiguration: 帮我们给容器自动配置组件；
+> xxxProperties: 配置类来封装配置文件的内容。
+
+- 这个场景SpringBoot帮我们配置了什么？能不能修改？能修改哪些配置？能不能扩展？xxx
+
+## 二. SpringBoot对静态资源的映射规则
+
+```java
+@Override
+public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    if (!this.resourceProperties.isAddMappings()) {
+        logger.debug("Default resource handling disabled");
+        return;
+    }
+    Duration cachePeriod = this.resourceProperties.getCache().getPeriod();
+    CacheControl cacheControl = this.resourceProperties.getCache().getCachecontrol().toHttpCacheControl();
+    if (!registry.hasMappingForPattern("/webjars/**")) {
+        customizeResourceHandlerRegistration(registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/")
+                .setCachePeriod(getSeconds(cachePeriod)).setCacheControl(cacheControl));
+    }
+    String staticPathPattern = this.mvcProperties.getStaticPathPattern();
+    if (!registry.hasMappingForPattern(staticPathPattern)) {
+        customizeResourceHandlerRegistration(registry.addResourceHandler(staticPathPattern)
+                .addResourceLocations(getResourceLocations(this.resourceProperties.getStaticLocations()))
+                .setCachePeriod(getSeconds(cachePeriod)).setCacheControl(cacheControl));
+    }
+}
+```
+
+### 1. webjars
+
+- 所有/webjars/**,都去classpath:/META-INF/resources/webjars/找资源
+
+- webjars：以jar包的形式引入静态资源
+- [官网](https://www.webjars.org/)
+- ![path](.\imgs\webjars-jquery.png)
+
+- localhost:8080/webjars/jquery/3.4.1/jquery.js
+
+  ```xml
+      <!-- 引入jquery-webjar -->在访问的时候只需要写webjars下面资源的名称即可
+      <dependency>
+          <groupId>org.webjars</groupId>
+          <artifactId>jquery</artifactId>
+          <version>3.4.1</version>
+      </dependency>
+  ```
+
+### 2. 静态资源 
+
+- "/**"访问当前项目的任何资源，（静态资源）
+
+```java
+"classpath:/META-INF/resources/",
+"classpath:/resources/",
+"classpath:/static/",
+"classpath:/public/"
+"/":当前项目的根路径
+```
+
+- localhost:8080/abc——去静态资源文件夹里面找abc
+
+### 3. 欢迎页面
+
+> 静态资源文件夹下的所有index.html页面，被/**映射
+
+### 4. 图标
+
+> 所有的**/favicon 都是在静态资源文件夹下找
+
+### 5. 自定义静态资源文件夹
+
+```properties
+# 自定义静态资源文件夹，原文件夹不可使用
+#spring.resources.static-locations=classpath:/hello
+```
+
+## 三. 模板引擎
+
+> JSP,Velocity,Freemarker,Thymeleaf
+
+- SpringBoot推荐使用Thymeleaf
+
+### 1. 引入
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-thymeleaf</artifactId>
+</dependency>
+```
+
+### 2. Thymeleaf的使用与语法
+
+```java
+@ConfigurationProperties(prefix = "spring.thymeleaf")
+public class ThymeleafProperties {
+
+    private static final Charset DEFAULT_ENCODING = StandardCharsets.UTF_8;
+
+    public static final String DEFAULT_PREFIX = "classpath:/templates/";
+
+    public static final String DEFAULT_SUFFIX = ".html";
+}
+```
+
+> 只要我们把HTML放在classpath://templates/，thymeleaf就能自动渲染
+
+#### 使用
+
+> [官方文档](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.pdf)
+
+1. 导入thymeleaf的名称空间
+
+    ```html
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    ```
+
+2. 使用thymeleaf语法
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+    <h1>成功！</h1>
+    <!--th:text 将div里面的文本内容设置为-->
+    <div th:text="${hello}">这里显示欢迎信息</div>
+    </body>
+    </html>
+    ```
+
+3. 语法规则
+
+   - th:text：改变元素里面的文本内容
+     - th：任意html属性：来替换原生属性的值
+   - 表达式
+     - 内置对象
+
+    > 看文档
+
+## 四. Spring MVC 自动配置
+
+[官方文档](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-spring-mvc-auto-configuration)
+
+Spring MVC Auto-configuration
+
+>SpringBoot 自动配置好了SpringMVC;
+>以下是SpringBoot对SpringMVC的默认配置：
+
+Spring Boot provides auto-configuration for Spring MVC that works well with most applications.
+
+The auto-configuration adds the following features on top of Spring’s defaults:
+
+- Inclusion of ContentNegotiatingViewResolver and BeanNameViewResolver beans.
+  - 自动配置了ViewResovler（视图解析器：根据方法的返回值得到视图对象（view)，视图对象决定如何渲染（转发？重定向？））
+  - ContentNegotiatingViewResovler：组合所有视图解析器
+  - 如何定制：我们可以自己给容器中添加一个视图解析器；自动的将其组合进来；
+
+- Support for serving static resources, including support for WebJars (covered later in this document)).
+  - 静态资源路径；webjars
+
+- Automatic registration of Converter, GenericConverter, and Formatter beans.
+  - Converter：转换器，public String hello(User user):类型转换使用converter
+  - Formatter: 格式化器 2020.3.14==Date;
+
+```java
+@Bean
+@ConditionalOnProperty(perfix = "spring.mvc", name = "date-formatter")  // 在文件中配置日期格式化的规则
+public Formatter<Date> dateFormatter() {
+    return new DateFormatter(this.mvcProperties.getDateFormat());   // 日期格式化
+}
+```
+
+> 自己添加的格式化转换器，我们只需放在容器中即可
+
+- Support for HttpMessageConverters (covered later in this document).
+  - HttpMessageConverters: SpringMVC用来转换HTTP请求和响应的；User---json
+  - HttpMessageConverters: 是从容器中确定；获取所有的HttpMessageConverter；
+  - 如果自己给容器中添加HttpMessageConverter，只需将自己的组件注册到容器中（@Bean，@Component）
+
+- Automatic registration of MessageCodesResolver (covered later in this document).
+  - 定义错误代码生成规则
+
+- Static index.html support.
+
+- Custom Favicon support (covered later in this document).
+
+- Automatic use of a ConfigurableWebBindingInitializer bean (covered later in this document).
+  - 我们可以配置一个默ConfigurableWebBingingInitialize来替换默认的；（添加到容器）
+  - 初始化WebDataBindere;
+
+> org.springframework.boot.autoconfigure.web: web的所有自动场景
+
+If you want to keep those Spring Boot MVC customizations and make more MVC customizations (interceptors, formatters, view controllers, and other features), you can add your own @Configuration class of type WebMvcConfigurer but without @EnableWebMvc.
+
+## 五. 如何修改SpringBoot的默认配置
+
+模式：
+
+1. SpringBoot在自动配置很多组件的时候，先看容器中有没有用户自己配的（@Bean，@Component），如果有就用用户自己配置的，如果没有，才自动配置；如果有些组件可以有多个（ViewResolver）将用户配置和自己默认的组合起来；
+
+2. 

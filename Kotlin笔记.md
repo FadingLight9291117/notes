@@ -1,8 +1,6 @@
 # Kotlin 笔记
 
-## 一、Controll Flow
-
-### 1. if expression
+## 一.if expression
 
 ``` kt
 // As expression
@@ -20,7 +18,7 @@ val max = if (a > b) {
 
 > if you are using **if** as an expression rather than a statement, the expression is required to have an **else** branch.
 
-### 2. when expression
+## 二.when expression
 
 > when replaces the switch operator of C-like language.
 
