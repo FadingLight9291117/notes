@@ -301,3 +301,9 @@ public class DelegatingWebMvcConfiguration extends WebMvcConfigurationSupport {
 1. SpringBoot在自动配置很多组件的时候，先看容器中有没有用户自己配的（@Bean，@Component），如果有就用用户自己配置的，如果没有，才自动配置；如果有些组件可以有多个（ViewResolver）将用户配置和自己默认的组合起来；
 
 2. 在SpringBoot中会有非常多的xxxConfigure帮助我们扩展配置
+
+## 六.国际化
+
+> i18n : internationalization国际化，去首尾字母，中间18个字母，简称位i18n
+
+![image-20200415121440965](.\imgs\image-20200415121440965.png)
