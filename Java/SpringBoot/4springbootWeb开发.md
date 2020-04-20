@@ -307,3 +307,108 @@ public class DelegatingWebMvcConfiguration extends WebMvcConfigurationSupport {
 > i18n : internationalization国际化，去首尾字母，中间18个字母，简称位i18n
 
 ![image-20200415121440965](.\imgs\image-20200415121440965.png)
+
+## 七. 登录拦截器
+
+- 配置拦截器
+
+```java
+/**
+ * 登录检查
+ */
+@Component
+public class LoginHandlerInterceptor implements HandlerInterceptor {
+    // 目标方法之前
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        HttpSession session = request.getSession();
+        Optional<String> username = Optional.ofNullable((String) session.getAttribute("username"));
+        Optional<String> password = Optional.ofNullable((String) session.getAttribute("password"));
+        if (username.isEmpty() || password.isEmpty()) {
+            request.getRequestDispatcher("/login");
+            return false;
+        } else {
+            return true;
+        }
+    }
+```
+
+- 注册拦截器
+
+```java
+@Configuration
+public class MyMvcConfig implements WebMvcConfigurer {
+    // 注册拦截器
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LoginHandlerInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/index.html", "/form", "/", "/user/login");
+    }
+}
+
+```
+
+## 八.定制错误页面
+
+- 原理:
+- 可以参照ErrorMvcAutoConfiguration
+- 给容器添加以下组件
+  - DefaultErrorAttributes
+  - BasicErrorConstroller
+  - ErrorPageCustomizer
+  - DefaultErrorViewResolver
+
+## 九.嵌入式servlet容器配置修改
+
+问题？
+
+1. 如何定制和修改servlet容器的相关配置；
+
+   1. 修改和server相关的配置（ServerProperties）：
+
+   ```properties
+   server.port=8001
+   server.context-path=/curd
+   
+   server.tomcat.url-encoding=UTF-8
+   
+   // 通用的Servlet容器配置
+   server.xxx
+   // Tomcat的设置
+   server.tomcat.xxx
+   ```
+
+   2. 编写一个EmbeddedServletContainerCustomizer
+
+## 十.注册Servlet三大组件
+
+1. 注册Servlet，Filter，Listener
+   1. ServletRegistrationBean
+   2. FilterRegistrationBean
+   3. ServletListenerRegistrationBean
+
+## 十一.替换其他嵌入式Servlet容器
+
+jetty
+
+```xml
+<dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- 引入其他的Servlet容器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jetty</artifactId>
+        </dependency>
+```
+
